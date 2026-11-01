@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Future Observatory — Aspirentre (simulation)</title>
+<style>
+body{font-family:system-ui,sans-serif;margin:0;background:#0b1020;color:#eef}
+header,main{max-width:900px;margin:auto;padding:1rem}
+nav a{margin-right:1rem;color:#9cf}
+.card{border:1px solid #334;border-radius:12px;padding:1rem;margin:1rem 0;background:#141b33}
+button{border:0;border-radius:999px;padding:.5rem 1rem;background:#eef;color:#111;cursor:pointer;margin:.2rem}
+.bar{height:14px;background:#4af;border-radius:7px;margin:.2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
+</style>
+</head>
+<body>
+<header>
+<nav><a href="../index.html">← Home</a><a href="../inspiration/index.html">Inspiration Hall</a><a href="../course/index.html">Course</a><a href="../icc/index.html">Mock Review</a></nav>
+<h1>Future Observatory <span style="color:#4af">LIVE (simulation)</span></h1>
+<p>Station data, global innovation signals, and a future-technology radar — all mocked in your browser.</p>
+<p id="clocks"></p>
+</header>
+<main>
+<div class="card"><h2>Future technology radar (mock indices)</h2><div id="radar"></div></div>
+<div class="card"><h2>Global innovation signals</h2>
+<button onclick="filter('all')">All</button><button onclick="filter('tech')">Technology</button><button onclick="filter('edu')">Education</button><button onclick="filter('policy')">Policy</button>
+<ul id="signals"></ul>
+<p>Sources named in the original structure include education, technology and science publications — this simulation does not fetch any live feed.</p></div>
+<div class="card"><h2>Course constellation</h2><p>40 chapters · 8 routes · 260 scenes (structure only).</p><div class="grid" id="routes"></div></div>
+<div class="card"><h2>Public works carousel</h2><p id="work"></p><button id="nextWork">Next work ›</button></div>
+</main>
+<script>
+function clocks(){
+ const zones={'Beijing':'Asia/Shanghai','Silicon Valley':'America/Los_Angeles','London':'Europe/London','Tokyo':'Asia/Tokyo','Singapore':'Asia/Singapore'};
+ document.getElementById('clocks').textContent=Object.entries(zones).map(([k,v])=>`${k}: ${new Date().toLocaleTimeString('en-GB',{timeZone:v})}`).join(' · ');
+}
+clocks(); setInterval(clocks,1000);
+const radar=[['AI',99],['Quantum',78],['Robotics',84],['Biology',76],['Energy',69],['Education',89]];
+document.getElementById('radar').innerHTML=radar.map(r=>`<p>${r[0]} — ${r[1]}<div class="bar" style="width:${r[1]}%"></div></p>`).join('');
+const signals=[
+ ['tech','A new classroom robot prototype is tested in a school lab.'],
+ ['edu','A district shares invention lessons that start from everyday problems.'],
+ ['policy','A city announces funding for youth innovation programmes.'],
+ ['tech','A small team demos a low-cost sensor for home use.'],
+ ['edu','Students present inventions at a regional showcase.'],
+];
+function filter(k){document.getElementById('signals').innerHTML=signals.filter(s=>k==='all'||s[0]===k).map(s=>`<li>${s[1]}</li>`).join('');}
+filter('all');
+document.getElementById('routes').innerHTML=['Nature and life','Society and digital','Systems and projects','Prototypes and iteration','Annual project','Exhibition','Ideas and methods','Making and testing'].map(r=>`<div class="card">${r}</div>`).join('');
+const works=['Umbrella that finds its owner','Sock-pair clip','Plant pot that waters itself','Medicine reminder box'];
+let wi=0; const w=document.getElementById('work'); w.textContent=works[0];
+document.getElementById('nextWork').onclick=()=>{wi=(wi+1)%works.length; w.textContent=works[wi];};
+</script>
+</body>
+</html>

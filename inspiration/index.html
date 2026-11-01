@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Inspiration Hall — Aspirentre (simulation)</title>
+<style>
+body{font-family:system-ui,sans-serif;margin:0;background:#fff8e7;color:#222}
+header,main{max-width:900px;margin:auto;padding:1rem}
+nav a{margin-right:1rem}
+.card{border:1px solid #ddd;border-radius:12px;padding:1rem;margin:1rem 0;background:#fff}
+button{border:0;border-radius:999px;padding:.6rem 1rem;background:#222;color:#fff;cursor:pointer;margin:.2rem}
+button.secondary{background:#eee;color:#222}
+input{width:100%;padding:.7rem;border:1px solid #ccc;border-radius:8px}
+</style>
+</head>
+<body>
+<header>
+<nav><a href="../index.html">← Home</a><a href="../course/index.html">Course</a><a href="../icc/index.html">Mock Review</a><a href="../future/index.html">Observatory</a></nav>
+<h1>Inspiration Hall</h1>
+<p>Today, what problem do you want to solve?</p>
+</header>
+<main>
+<div class="card">
+<input id="problem" value="I want to invent a small box that reminds mum to take her medicine on time">
+<p id="chips"></p>
+<button id="mentors">Invite six mentors</button>
+<button class="secondary" id="random">Random inspiration</button>
+</div>
+<div class="card" id="discussion" style="display:none"><h2>Simulated mentor discussion</h2><div id="lines"></div><p><em>Client-side templates only — no AI, no account, nothing is sent anywhere.</em></p></div>
+<div class="card"><h2>Other starting points</h2><ul>
+<li>Try a challenge: break one habit of thinking in three minutes.</li>
+<li>Watch a simulated mentor debate and build a new creature together.</li>
+<li>Become a “light-bearer”: learn, then help someone else create.</li>
+</ul></div>
+</main>
+<script>
+const chips=['A tape cutter that snaps cleanly','A fan guard that stops cold air blowing straight at you','A cane tip that grips on snow','An umbrella that folds away without dripping','A seasoning bottle that pours one dose at a time','A chair back that reminds you to sit straight'];
+const el=document.getElementById('chips');
+el.innerHTML=chips.map(c=>`<button class="secondary" onclick="document.getElementById('problem').value='I want to invent ${c[0].toLowerCase()+c.slice(1)}'">${c}</button>`).join(' ');
+document.getElementById('random').onclick=()=>{document.getElementById('problem').value='I want to invent '+chips[Math.floor(Math.random()*chips.length)].toLowerCase();};
+document.getElementById('mentors').onclick=()=>{
+ const p=document.getElementById('problem').value;
+ const lines=[
+  'Mentor 1 — Who exactly has this problem, and when does it hurt most?',
+  'Mentor 2 — What is the simplest version that could work this week?',
+  'Mentor 3 — What could go wrong, and how would we test it safely?',
+  'Mentor 4 — Can we reuse something that already exists, in a new way?',
+  'Mentor 5 — How would a child explain this invention in one sentence?',
+  'Mentor 6 — Together: start small, try it, then improve it.',
+ ];
+ document.getElementById('lines').innerHTML='<p><strong>Problem:</strong> '+p.replace(/</g,'&lt;')+'</p>'+lines.map(l=>`<p>${l}</p>`).join('');
+ document.getElementById('discussion').style.display='block';
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>World Innovation Port — Course — Aspirentre (simulation)</title>
+<style>
+body{font-family:system-ui,sans-serif;margin:0;background:#eef6ff;color:#222}
+header,main{max-width:900px;margin:auto;padding:1rem}
+nav a{margin-right:1rem}
+.card{border:1px solid #ddd;border-radius:12px;padding:1rem;margin:1rem 0;background:#fff}
+button{border:0;border-radius:999px;padding:.5rem 1rem;background:#222;color:#fff;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
+</style>
+</head>
+<body>
+<header>
+<nav><a href="../index.html">← Home</a><a href="../inspiration/index.html">Inspiration Hall</a><a href="../icc/index.html">Mock Review</a><a href="../future/index.html">Observatory</a></nav>
+<h1>World Innovation Port — online classroom</h1>
+<p>Season 1: 12 chapters · Full year: 40 chapters · Interactive web lessons, no slide decks.</p>
+<p>Each class follows one pattern: one challenge, one outcome, one presentation, one record.</p>
+<p><em>Simulation: chapter contents are not included. Locked chapters show a password prompt, as in the original structure, but no password works here.</em></p>
+</header>
+<main>
+<div class="card"><h2>Season 1</h2><div class="grid" id="season"></div></div>
+<div class="card"><h2>Chapters 13–40 — planned route</h2><ul>
+<li>Nature and life</li><li>Society and digital life</li><li>Systems and projects</li>
+<li>Prototypes and iteration</li><li>Annual project and exhibition</li>
+</ul></div>
+<div class="card"><h2>For teachers</h2><p>Open a web page, advance with the arrow key, press T for teacher guidance, F for fullscreen — in the original teaching model. This simulation has no teacher workbench or login.</p></div>
+</main>
+<script>
+const months=[['Month 01 — Getting started with invention',1,4],['Month 02 — Wild ideas',5,8],['Month 03 — Structure and machines',9,12]];
+document.getElementById('season').innerHTML=months.map(m=>`<div><h3>${m[0]}</h3>${Array.from({length:4},(_,k)=>{const n=m[1]+k;return `<p>Chapter ${n} <button onclick="alert('Chapter ${n} is password-locked in this simulation. No lesson content is included.')">🔒 Enter with password</button></p>`;}).join('')}</div>`).join('');
+</script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aspirentre — Invention Campus (simulation)</title>
+<style>
+body{font-family:system-ui,sans-serif;margin:0;background:#fff8e7;color:#222}
+header,main,footer{max-width:900px;margin:auto;padding:1rem}
+nav a{margin-right:1rem}
+.card{border:1px solid #ddd;border-radius:12px;padding:1rem;margin:1rem 0;background:#fff}
+button{border:0;border-radius:999px;padding:.6rem 1rem;background:#222;color:#fff;cursor:pointer}
+button.secondary{background:#eee;color:#222}
+.large{font-size:1.25rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
+.locked{opacity:.6}
+#prologue{position:fixed;inset:0;background:#222;color:#fff;display:flex;align-items:center;justify-content:center;z-index:10}
+#prologue .box{max-width:500px;text-align:center;padding:2rem}
+</style>
+</head>
+<body>
+<div id="prologue"><div class="box">
+<h1>Prologue (simulation)</h1>
+<p>Welcome to the invention campus. A new inventor arrives, and six mentors
+gather to brainstorm. This is a short, client-side stand-in for the original
+animated opening — no account, no backend.</p>
+<button id="skip">Skip prologue &gt;</button>
+</div></div>
+
+<header>
+<nav>
+<a href="index.html">Home</a>
+<a href="inspiration/index.html">Inspiration Hall</a>
+<a href="course/index.html">Course</a>
+<a href="icc/index.html">Mock Review</a>
+<a href="future/index.html">Observatory</a>
+</nav>
+<h1>Today, let's invent something that didn't exist before.</h1>
+<p>You don't need to be an expert first. Bring a problem, a little curiosity,
+or a bold “what if?”.</p>
+<p><em>Simulation note: this page mimics the public structure only. Gallery
+items, counters and mentors below are mocked in your browser.</em></p>
+</header>
+
+<main>
+<div class="card">
+<button onclick="location.href='inspiration/index.html'">Start creating</button>
+<button class="secondary" onclick="location.href='course/index.html'">Start learning</button>
+<button class="secondary" onclick="location.href='inspiration/index.html'">5 minutes, one invention</button>
+<button class="secondary" onclick="location.href='icc/index.html'">Enter the mock competition</button>
+</div>
+
+<div class="card">
+<h2>Gallery — ideas on show</h2>
+<p id="gallery"></p>
+<button id="prev">‹ Previous</button>
+<button id="next">Next ›</button>
+<button class="secondary" id="big">Large text</button>
+<button class="secondary" id="detail">Detail view</button>
+<p id="detailText"></p>
+<p>Today's new ideas: <span id="today">0</span> · Currently inventing: <span id="inventing">0</span> · This week's featured works: <span id="featured">19</span></p>
+</div>
+
+<div class="card">
+<h2>Campus map</h2>
+<div class="grid" id="map"></div>
+<p>Growth tree: <span id="tree">0 / 3 works</span></p>
+</div>
+</main>
+
+<footer><p><a href="future/index.html">Surprise — the future observatory</a> · <button class="secondary" onclick="document.documentElement.requestFullscreen()">Fullscreen</button></p></footer>
+
+<script>
+document.getElementById('skip').onclick=()=>document.getElementById('prologue').remove();
+const ideas=[
+ {t:'Umbrella that finds its owner',d:'A small tag and a gentle beep help an umbrella call out when it is left behind.'},
+ {t:'Sock-pair clip',d:'A soft clip keeps two socks together through the wash, so pairs never split up.'},
+ {t:'Plant pot that waters itself',d:'A sensor checks soil dryness and releases just enough water, with light guidance.'},
+ {t:'Slipper navigator',d:'A playful indoor guide for slippers, so morning routines start without a search.'},
+ {t:'Medicine reminder box',d:'A small box that lights up and chimes when it is time for a dose.'},
+ {t:'Tape cutter that never jams',d:'A one-pull cutter that snaps tape cleanly, without sticking to itself.'},
+];
+let i=0;
+const g=document.getElementById('gallery'), d=document.getElementById('detailText');
+function show(){g.textContent=ideas[i].t; d.textContent=ideas[i].d;}
+document.getElementById('prev').onclick=()=>{i=(i+ideas.length-1)%ideas.length;show();};
+document.getElementById('next').onclick=()=>{i=(i+1)%ideas.length;show();};
+document.getElementById('big').onclick=()=>document.body.classList.toggle('large');
+document.getElementById('detail').onclick=()=>{d.style.display=d.style.display==='none'?'block':'none';};
+show();
+const nodes=[
+ ['Inspiration Hall','Start with an idea','inspiration/index.html',false],
+ ['Six-mentor roundtable','Ideas collide and improve','inspiration/index.html',false],
+ ['Invention bay','Locked until a roundtable is complete','#',true],
+ ['Creative workshop','Locked until an invention is in progress','#',true],
+ ['Business arena','Locked until a roundtable is complete','#',true],
+ ['Hall of Fame','Works and honours','index.html',false],
+ ['My lab','Your personal space','#',false],
+ ['World Innovation Port','Online classroom · 12 chapters','course/index.html',false],
+];
+document.getElementById('map').innerHTML=nodes.map(n=>`<div class="card ${n[3]?'locked':''}"><h3>${n[3]?'🔒 ':''}${n[0]}</h3><p>${n[1]}</p>${n[3]?'':`<a href="${n[2]}">Open →</a>`}</div>`).join('');
+</script>
+</body>
+</html>

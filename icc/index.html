@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mock Review Room — Aspirentre (simulation)</title>
+<style>
+body{font-family:system-ui,sans-serif;margin:0;background:#fdf2f8;color:#222}
+header,main{max-width:900px;margin:auto;padding:1rem}
+nav a{margin-right:1rem}
+.card{border:1px solid #ddd;border-radius:12px;padding:1rem;margin:1rem 0;background:#fff}
+button{border:0;border-radius:999px;padding:.6rem 1rem;background:#222;color:#fff;cursor:pointer}
+input,select,textarea{width:100%;padding:.6rem;margin:.3rem 0;border:1px solid #ccc;border-radius:8px;box-sizing:border-box}
+</style>
+</head>
+<body>
+<header>
+<nav><a href="../index.html">← Home</a><a href="../inspiration/index.html">Inspiration Hall</a><a href="../course/index.html">Course</a><a href="../future/index.html">Observatory</a></nav>
+<h1>Mock review room</h1>
+<p><strong>Simulated only — not official, for practice before a real competition.</strong></p>
+<p>Example room: Review Circle 07 · Primary group · City theme round. Example project: “Homework reminder chair” — a chair back that gently reminds you to sit straight. Mock scores (out of 100): process 40, influence 25, communication 35.</p>
+</header>
+<main>
+<div class="card"><h2>Fill in an entry form</h2>
+<form onsubmit="event.preventDefault();document.getElementById('done').style.display='block';">
+<label>Name <input required></label>
+<label>Class <input></label>
+<label>Group <select><option>P — Primary</option><option>G — General</option><option>J — Junior</option><option>S — Senior</option></select></label>
+<label>Project name <input required></label>
+<label>Problem it solves <textarea required></textarea></label>
+<label>One-line pitch <input required></label>
+<label>Strongest evidence <input></label>
+<button type="submit">Start mock review →</button>
+</form>
+<p id="done" style="display:none"><strong>Simulation:</strong> this form does not submit, upload, or store anything. In the original structure a mock review is priced in creation coins; here there is no account or payment.</p>
+</div>
+<div class="card"><h2>What a mock review would check</h2><ul><li>Is the problem real and clearly stated?</li><li>Does the solution actually help?</li><li>Can you explain it simply and show evidence?</li></ul></div>
+</main>
+</body>
+</html>
